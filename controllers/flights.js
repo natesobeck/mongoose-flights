@@ -4,6 +4,10 @@ function newFlight(req, res) {
   res.render('flights/new', {
     title: 'Add Flight'
   })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/flights')
+  })
 }
 
 function create(req, res) {
@@ -75,6 +79,23 @@ function edit(req, res) {
   })
 }
 
+function update(req, res) {
+  for (let key in req.body) {
+    if (req.body[key] === '') {
+      delete req.body[key]
+    }
+  }
+  console.log(req.body)
+  Flight.findByIdAndUpdate(req.params.movieId, req.body, {new: true})
+  .then(flight => {
+    res.redirect(`/flights/${flight._id}`)
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/flights')
+  })
+}
+
 export {
   newFlight as new,
   create,
@@ -82,4 +103,5 @@ export {
   deleteFlight as delete,
   show,
   edit,
+  update,
 }
