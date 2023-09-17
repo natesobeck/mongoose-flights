@@ -23,8 +23,7 @@
     <label for="flight-no-input">Flight Number:</label>
     <input type="number" value="<%= flight.flightNo %>" name="flightNo" id="flight-no-input">
     <label for="departs-input">Departs:</label>
-    <input type="date" value="<%= flight.stringDepartDate %>" name="departs" id="departs-input">
-    <label for="departs-input-time">Departure Time:</label>
+    <input type="datetime-local" value="<%= flight.stringDepartDate %>" name="departs" id="departs-input">
     <button type="submit">Save Flight</button>
   </form>
 </main>

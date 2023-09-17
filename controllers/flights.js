@@ -71,16 +71,26 @@ function show(req, res) {
 function edit(req, res) {
   Flight.findById(req.params.flightId)
   .then(flight => {
-    const dateDeparts = flight.departs
-    console.log(flight.departs)
+    const dateDeparts = flight.departs.toLocaleString().split('/')
+    const timeDeparts = flight.departs.toLocaleTimeString().split(':')
+    // console.log(flight.departs)
+    // console.log(dateDeparts, 'TIME', timeDeparts)
     //reformat dateDeparts to string version
-    const stringDepartsDate = dateDeparts.toLocaleString().split('').splice(0, 9).join('')
-    const stringYear = stringDepartsDate.split('').splice(5, 9).join('')
-    const stringMonth = stringDepartsDate.split('').splice(0, 1).join('').padStart(2, '0')
-    const stringDay = stringDepartsDate.split('').splice(2, 2).join('').padStart(2, '0')
-    const finalStringDate = `${stringYear}-${stringMonth}-${stringDay}`
-    flight.stringDepartDate = finalStringDate
-    console.log(flight.stringDepartDate)
+    const stringDay = dateDeparts[1].padStart(2, '0')
+    // console.log('DAY', stringDay)
+    const stringYear = dateDeparts[2].slice(0, 4)
+    // console.log('YEAR', stringYear)
+    const stringMonth = dateDeparts[0].padStart(2, '0')
+    // console.log('MONTH', stringMonth)
+    const amOrPm = timeDeparts[2].split(' ')[1]
+    let stringHour = timeDeparts[0].padStart(2, '0')
+    if (amOrPm === 'PM') {
+      stringHour = (parseInt(stringHour) + 12).toString().padStart(2, '0')
+    }
+    // console.log(stringHour)
+    const stringMinutes = timeDeparts[1]
+    const stringDepartDate = `${stringYear}-${stringMonth}-${stringDay}T${stringHour}:${stringMinutes}`
+    flight.stringDepartDate = stringDepartDate
     res.render('flights/edit', {
       flight: flight,
       title: 'Edit Flight'
