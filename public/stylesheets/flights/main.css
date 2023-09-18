@@ -1,0 +1,62 @@
+html {
+  box-sizing: border-box;
+}
+
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #EEF0F2;
+  margin: 0;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  grid-template-areas: 
+    "nav"
+    "main";
+  font-size: 20px;
+  color: rgb(66, 75, 84);
+}
+
+nav {
+  height: 60px;
+  width: 100%;
+  background-color: rgb(66, 75, 84);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: 2px solid #F0A202;
+}
+
+nav > a {
+  color: #EEF0F2;
+  text-decoration: none;
+  padding: 5px 30px 5px 30px;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: underline 0.1em rgba(255, 255, 255, 0);
+  transition: text-decoration-color 500ms;
+}
+
+nav > a:visited {
+  color: #EEF0F2;
+}
+
+body > main > h1:first-child {
+  margin-top: 50px;
+}
+
+nav > a:hover {
+  color: rgb(66, 75, 84);
+  background-color: #EEF0F2;
+  text-decoration-color: rgb(66, 75, 84);
+  text-underline-offset: .2em;
+}
+
+.nav-divider {
+  width: 2px;
+  height: 80%;
+  background-color: #F0A202;
+}
