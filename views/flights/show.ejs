@@ -15,6 +15,12 @@
     <div><%= flight.flightNo %></div>
     <div>Departure: </div>
     <div><%= flight.departs %></div>
+    <div>Tickets: </div>
+    <ul>
+      <% flights.tickets.forEach(ticket => { %>
+        <li><%= `Seat: ${ticket.seat}, Price: ${ticket.price}` %></li>
+      <% }) %>
+    </ul>
   </section>
   <div>
     <a href="/flights/<%= flight._id %>/edit">
