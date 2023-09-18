@@ -64,3 +64,9 @@ nav > a.active {
   height: 80%;
   background-color: #F0A202;
 }
+
+h1 {
+  border-bottom: 2px solid #e8c276;
+  width: 190px;
+  padding-bottom: 10px;
+}

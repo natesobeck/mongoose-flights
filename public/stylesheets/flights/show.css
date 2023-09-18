@@ -1,0 +1,29 @@
+h1 {
+  width: 240px;
+}
+
+section {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 16px;
+}
+
+section div:nth-child(odd) {
+  font-weight: bold;
+}
+
+main div a button {
+  padding: 10px 15px;
+  border: 2px solid rgb(66, 75, 84);
+  background-color: #e8c276;
+  border-radius: 10px;
+  font-size: 20px;
+  color: rgb(24, 24, 24);
+}
+
+main div a button:hover {
+  color: #e8c276;
+  background-color: rgb(66, 75, 84);
+  cursor: pointer;
+}
+
