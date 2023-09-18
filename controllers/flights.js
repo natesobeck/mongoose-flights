@@ -1,8 +1,13 @@
 import { Flight } from "../models/flight.js";
 
 function newFlight(req, res) {
+  const newFlight = new Flight()
+  const defaultDeparts = newFlight.departs
+  const departsDate = defaultDeparts.toISOString().slice(0, 16);
+  console.log(departsDate)
   res.render('flights/new', {
-    title: 'Add Flight'
+    title: 'Add Flight',
+    departsDate: departsDate, 
   })
   .catch(err => {
     console.log(err)
