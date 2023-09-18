@@ -45,3 +45,7 @@ h1 {
   width: 180px;
   padding-bottom: 10px;
 }
+
+.departed {
+  color: red;
+}

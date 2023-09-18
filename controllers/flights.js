@@ -37,9 +37,11 @@ function index(req, res) {
     flights.sort((flight1, flight2) => {
       return flight1.departs.getTime() - flight2.departs.getTime()
     })
+    const today = new Date().getTime()
     res.render('flights/index', {
       flights: flights,
-      title: 'All Flights'
+      title: 'All Flights',
+      today: today,
     })
   })
   .catch(err => {
