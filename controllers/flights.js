@@ -16,14 +16,11 @@ function newFlight(req, res) {
 }
 
 function create(req, res) {
-  console.log('INITIAL REQ BODY', req.body)
   for (let key in req.body) {
     if (req.body[key] === '') {
       delete req.body[key]
     }
   }
-  console.log('SUBSEQUENT REQ BODY', req.body)
-
   Flight.create(req.body)
   .then(flight => {
     res.redirect('/flights')
@@ -37,6 +34,9 @@ function create(req, res) {
 function index(req, res) {
   Flight.find({})
   .then(flights => {
+    flights.sort((flight1, flight2) => {
+      return flight1.departs.getTime() - flight2.departs.getTime()
+    })
     res.render('flights/index', {
       flights: flights,
       title: 'All Flights'
