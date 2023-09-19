@@ -64,6 +64,7 @@ function deleteFlight(req, res) {
 
 function show(req, res) {
   Flight.findById(req.params.flightId)
+  .populate('meals')
   .then(flight => {
     Meal.find({_id: {$nin: flight.meals}})
     .then(meals => {
@@ -72,6 +73,10 @@ function show(req, res) {
         meals: meals,
         title: 'Flight Details',
       })
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect('/flights')
     })
   })
   .catch(err => {
@@ -85,21 +90,14 @@ function edit(req, res) {
   .then(flight => {
     const dateDeparts = flight.departs.toLocaleString().split('/')
     const timeDeparts = flight.departs.toLocaleTimeString().split(':')
-    // console.log(flight.departs)
-    // console.log(dateDeparts, 'TIME', timeDeparts)
-    //reformat dateDeparts to string version
     const stringDay = dateDeparts[1].padStart(2, '0')
-    // console.log('DAY', stringDay)
     const stringYear = dateDeparts[2].slice(0, 4)
-    // console.log('YEAR', stringYear)
     const stringMonth = dateDeparts[0].padStart(2, '0')
-    // console.log('MONTH', stringMonth)
     const amOrPm = timeDeparts[2].split(' ')[1]
     let stringHour = timeDeparts[0].padStart(2, '0')
     if (amOrPm === 'PM') {
       stringHour = (parseInt(stringHour) + 12).toString().padStart(2, '0')
     }
-    // console.log(stringHour)
     const stringMinutes = timeDeparts[1]
     const stringDepartDate = `${stringYear}-${stringMonth}-${stringDay}T${stringHour}:${stringMinutes}`
     flight.stringDepartDate = stringDepartDate
@@ -159,6 +157,25 @@ function deleteTicket(req, res) {
   })
 }
 
+function addToMeals(req, res) {
+  Flight.findById(req.params.flightId)
+  .then(flight => {
+    flight.meals.push(req.body.mealId)
+    flight.save()
+    .then(() => {
+      res.redirect(`/flights/${flight._id}`)
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect('/flights')
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/flights')
+  })
+}
+
 export {
   newFlight as new,
   create,
@@ -169,4 +186,5 @@ export {
   update,
   createTicket,
   deleteTicket,
+  addToMeals, 
 }

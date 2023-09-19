@@ -4,11 +4,6 @@
 
 <main>
   <h1><%= title %></h1>
-  <div>
-    <a href="/flights/<%= flight._id %>/edit">
-      <button>Edit Flight</button>
-    </a>
-  </div>
   <section>
     <div>Airline: </div>
     <div>
@@ -39,6 +34,7 @@
       <% }) %>
     </ul>
   </section>
+  <h3>Add a meal to this flight: </h3>
   <form id="add-meal-to-flight" method="POST" action="/flights/<%= flight._id %>/meals">
     <select name="mealId">
       <% meals.forEach(meal => { %>
@@ -59,6 +55,11 @@
       </form>
     </div>
   </section>
+  <div>
+    <a href="/flights/<%= flight._id %>/edit">
+      <button>Edit Flight</button>
+    </a>
+  </div>
 </main>
   
 <%- include('../partials/footer') %>
