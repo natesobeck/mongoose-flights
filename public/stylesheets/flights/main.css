@@ -20,6 +20,13 @@ body {
   color: rgb(66, 75, 84);
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 nav {
   height: 60px;
   width: 100%;

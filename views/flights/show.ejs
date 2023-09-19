@@ -16,19 +16,29 @@
     <div>Departure: </div>
     <div><%= flight.departs %></div>
     <div>Tickets: </div>
+    
     <ul>
       <% flight.tickets.forEach(ticket => { %>
         <li><%= `Seat: ${ticket.seat}, Price: ${ticket.price}` %></li>
+        <form
+            action="/flights/<%= flight._id %>/tickets/<%= ticket._id %>?_method=DELETE"
+            method="POST"
+          >
+          <button type="submit">X</button>
+        </form>
       <% }) %>
     </ul>
-    <h3>Add a New Ticket: </h3>
-    <form action="/flights/<%= flight._id %>/tickets" method="POST">
-      <label for="seat-content">Seat:</label>
-      <input name="seat" required pattern="[A-F][1-9]\d?" id="seat-content">
-      <label for="price-content">Price:</label>
-      <input type="number" name="price" id="price-content">
-      <button type="submit">Add Ticket</button>
-    </form>
+
+    <div class="form-container">
+      <h3>Add a New Ticket: </h3>
+      <form action="/flights/<%= flight._id %>/tickets" method="POST">
+        <label for="seat-content">Seat:</label>
+        <input name="seat" required pattern="[A-F][1-9]\d?" id="seat-content">
+        <label for="price-content">Price:</label>
+        <input type="number" placeholder="0.00" name="price" id="price-content" step=".01">
+        <button type="submit">Add Ticket</button>
+      </form>
+    </div>
   </section>
   <div>
     <a href="/flights/<%= flight._id %>/edit">

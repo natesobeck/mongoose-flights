@@ -26,4 +26,10 @@ main div a button:hover {
   background-color: rgb(66, 75, 84);
   cursor: pointer;
 }
-
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
