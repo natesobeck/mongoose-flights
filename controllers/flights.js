@@ -65,9 +65,13 @@ function deleteFlight(req, res) {
 function show(req, res) {
   Flight.findById(req.params.flightId)
   .then(flight => {
-    res.render('flights/show', {
-      flight: flight, 
-      title: 'Flight Details',
+    Meal.find({_id: {$nin: flight.meals}})
+    .then(meals => {
+      res.render('flights/show', {
+        flight: flight, 
+        meals: meals,
+        title: 'Flight Details',
+      })
     })
   })
   .catch(err => {
